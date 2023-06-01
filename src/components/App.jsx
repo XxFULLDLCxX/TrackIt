@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import Habits from './pages/Habits';
-import Register from './pages/Register';
-import Today from './pages/Today';
-import History from './pages/History';
-import { Normalize } from './styles';
+import Home from '../pages/Home';
+import Habits from '../pages/Habits';
+import Register from '../pages/Register';
+import Today from '../pages/Today';
+import History from '../pages/History';
+import { Normalize } from '../styles';
 
 function App() {
   const [count, setCount] = useState(0);

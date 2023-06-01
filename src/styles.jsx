@@ -8,10 +8,10 @@ export const Normalize = createGlobalStyle`
 }
 
 body {
-
+  font-family: 'Lexend Deca', sans-serif;
 }
 
-button {
+button, input {
   border: none;
   font-family: inherit;
 }
