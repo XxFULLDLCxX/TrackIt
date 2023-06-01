@@ -17,6 +17,9 @@ const FormContainer = styled.form`
   flex-direction: column;
   gap: 6px;
   input[type='text'] {
+    &::placeholder {
+      color: #dbdbdb;
+    }
     width: 303px;
     height: 45px;
 
@@ -29,9 +32,8 @@ const FormContainer = styled.form`
     font-weight: 400;
     font-size: 20px;
     line-height: 25px;
-
-    color: #dbdbdb;
   }
+
   input[type='submit'] {
     width: 303px;
     height: 45px;
@@ -41,7 +43,7 @@ const FormContainer = styled.form`
 
     font-style: normal;
     font-weight: 400;
-    font-size: 20.976px;
+    font-size: 21px;
     line-height: 26px;
     text-align: center;
 

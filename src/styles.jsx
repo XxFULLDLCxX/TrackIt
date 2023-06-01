@@ -8,11 +8,17 @@ export const Normalize = createGlobalStyle`
 }
 
 body {
+  display: flex;
+  justify-content: center;
   font-family: 'Lexend Deca', sans-serif;
+  background: #E5E5E5;
 }
+
 
 button, input {
   border: none;
+  outline: none;
   font-family: inherit;
+  user-select: none;
 }
 `;
