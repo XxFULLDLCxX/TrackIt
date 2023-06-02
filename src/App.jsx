@@ -6,21 +6,24 @@ import Register from './pages/Register';
 import Today from './pages/Today';
 import History from './pages/History';
 import { Normalize } from './styles';
+import { InputsDesabled } from './context/desabled';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   return (
     <>
       <Normalize />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/habitos" element={<HabitsPage />} />
-          <Route path="/cadastro" element={<Register />} />
-          <Route path="/hoje" element={<Today />} />
-          <Route path="/historico" element={<History />} />
-        </Routes>
+        <InputsDesabled.Provider value={{ loading, setLoading }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/cadastro" element={<Register />} />
+            <Route path="/habitos" element={<HabitsPage />} />
+            <Route path="/hoje" element={<Today />} />
+            <Route path="/historico" element={<History />} />
+          </Routes>
+        </InputsDesabled.Provider>
       </BrowserRouter>
     </>
   );
