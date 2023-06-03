@@ -1,22 +1,27 @@
 import { useContext } from 'react';
-import { InputsDesabled } from '../context/desabled';
 import Form from './Form';
-import { BASE_URL } from '../context/core';
+import { BASE_URL, Infos } from '../context/core';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const { setLoading } = useContext(InputsDesabled);
+  const { loading, setInfo, ...rest } = useContext(Infos);
+
+  const navigate = useNavigate();
   const login = (info) => {
     console.log('login', info);
-    setLoading(true);
+    setInfo({ ...rest, loading: true });
+
     axios.post(`${BASE_URL}/auth/login`, info)
-      .then(response => {
-        console.log(response);
+      .then(({ data: {id, name, image }}) => {
+        console.log(id, name, image);
         navigate('/hoje');
-        setLoading(false);
+        setInfo({ ...rest, loading: false, user: {id, name, avatar: image}});
       })
       .catch((error) => {
+        console.log(error);
+        setInfo({ ...rest, loading: false });
         alert(error.response.data.message ? error.response.data.message : error.message);
-        setLoading(false);
       }); // prettier-ignore
   };
   return <Form signup={false} submit={login} />;

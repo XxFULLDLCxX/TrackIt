@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import avatar from '../assets/user.svg';
+import { useContext } from 'react';
+import { Infos } from '../context/core';
 
 export default function Header() {
+  const { user } = useContext(Infos);
+
   const login = (e) => {
     e.preventDefault();
     console.log('login');
@@ -9,7 +13,7 @@ export default function Header() {
   return (
     <HeaderContainer data-test="header">
       <h1>TrackIt</h1>
-      <img data-test="avatar" src={avatar} alt="Foto do Usuário" />
+      <img data-test="avatar" src={user.avatar} alt="Foto do Usuário" />
     </HeaderContainer>
   );
 }
@@ -39,5 +43,6 @@ const HeaderContainer = styled.div`
   img {
     width: 51px;
     height: 51px;
+    border-radius: 50%;
   }
 `;

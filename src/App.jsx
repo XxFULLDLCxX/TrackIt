@@ -6,16 +6,16 @@ import Register from './pages/Register';
 import Today from './pages/Today';
 import History from './pages/History';
 import { Normalize } from './styles';
-import { InputsDesabled } from './context/desabled';
+import { Infos } from './context/core';
 
 function App() {
-  const [loading, setLoading] = useState(false);
+  const [info, setInfo] = useState({ loading: false, user: {} });
 
   return (
     <>
       <Normalize />
       <BrowserRouter>
-        <InputsDesabled.Provider value={{ loading, setLoading }}>
+        <Infos.Provider value={{ ...info, setInfo }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cadastro" element={<Register />} />
@@ -23,7 +23,7 @@ function App() {
             <Route path="/hoje" element={<Today />} />
             <Route path="/historico" element={<History />} />
           </Routes>
-        </InputsDesabled.Provider>
+        </Infos.Provider>
       </BrowserRouter>
     </>
   );

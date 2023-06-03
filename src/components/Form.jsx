@@ -1,14 +1,15 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { InputsDesabled } from '../context/desabled';
+import { Infos } from '../context/core';
 import { ThreeDots } from 'react-loader-spinner';
 
 export default function Form({ signup, submit }) {
-  const { loading } = useContext(InputsDesabled);
+  const { loading } = useContext(Infos);
+
   const preSubmit = (e) => {
     e.preventDefault();
     const info = signup ? ['email', 'password', 'name', 'image'] : ['email', 'password'];
-    submit(info.map((k) => ({ [k]: e.target[k].value })));
+    submit(info.reduce((obj, k) => ({ ...obj, [k]: e.target[k].value }), {}));
   };
   return (
     <FormContainer onSubmit={preSubmit}>
