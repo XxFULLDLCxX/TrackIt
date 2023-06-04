@@ -16,8 +16,4 @@ export default function History() {
 
 const HistoryContainer = styled.div`
   height: 100svh;
-  main {
-    height: calc(100% - 140px);
-    background-color: #f2f2f2;
-  }
 `;

@@ -2,9 +2,12 @@ import styled from 'styled-components';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Infos } from '../context/core';
 
 export default function Footer() {
-  const percentage = 66;
+  const percentage = 0;
+
   return (
     <FooterContainer>
       <Menu data-test="menu">

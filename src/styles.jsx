@@ -21,4 +21,10 @@ button, input {
   font-family: inherit;
   user-select: none;
 }
+main {
+  padding: 70px 0;
+  width: 375px;
+  height: 100%;
+  background-color: #f2f2f2;
+}
 `;

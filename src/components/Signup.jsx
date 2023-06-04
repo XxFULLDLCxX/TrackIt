@@ -10,7 +10,7 @@ export default function Signup() {
   const signup = (info) => {
     setInfo({ ...rest, loading: true });
     console.log(info);
-    axios.post(`${BASE_URL}/auth/sign-up`, info)
+    axios.post(`/auth/sign-up`, info)
       .then(() => {
         navigate('/');
         setInfo({ ...rest, loading: false });

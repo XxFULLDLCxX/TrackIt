@@ -3,18 +3,21 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Habits from '../components/Habits';
 import NewHabit from '../components/NewHabit';
+import { useState } from 'react';
 
 export default function HabitsPage() {
+  const [new_habit, setNewHabit] = useState(false);
+
   return (
     <HabitsContainer>
       <Header />
       <main>
         <Title>
           <h2>Meus hábitos</h2>
-          <button data-test="habit-create-btn">+</button>
+          <input data-test="habit-create-btn" type="button" value="+" onClick={() => setNewHabit(true)} />
         </Title>
-        {<NewHabit />}
-        {<Habits />}
+        {new_habit && <NewHabit setNewHabit={setNewHabit} />}
+        {false && <Habits />}
         <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
       </main>
       <Footer />
@@ -26,10 +29,7 @@ const HabitsContainer = styled.section`
   position: relative;
   height: 100svh;
   main {
-    background-color: #f2f2f2;
-    width: 100%;
-    height: calc(100% - 140px);
-    padding: 22px 18px 0px;
+    padding: 92px 18px 0px;
 
     > p {
       width: 338px;
@@ -55,7 +55,7 @@ const Title = styled.div`
 
     color: #126ba5;
   }
-  button {
+  > input {
     width: 40px;
     height: 35px;
     background-color: #52b6ff;

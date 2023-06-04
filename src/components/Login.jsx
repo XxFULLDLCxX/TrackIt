@@ -1,8 +1,10 @@
 import { useContext } from 'react';
 import Form from './Form';
-import { BASE_URL, Infos } from '../context/core';
-import axios from 'axios';
+import { Infos } from '../context/core';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
 
 export default function Login() {
   const { loading, setInfo, ...rest } = useContext(Infos);
@@ -12,9 +14,10 @@ export default function Login() {
     console.log('login', info);
     setInfo({ ...rest, loading: true });
 
-    axios.post(`${BASE_URL}/auth/login`, info)
-      .then(({ data: {id, name, image }}) => {
-        console.log(id, name, image);
+    axios.post(`/auth/login`, info)
+      .then(({ data: {id, name, image, token: AUTH_TOKEN }}) => {
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + AUTH_TOKEN;
+        console.log(AUTH_TOKEN);
         navigate('/hoje');
         setInfo({ ...rest, loading: false, user: {id, name, avatar: image}});
       })

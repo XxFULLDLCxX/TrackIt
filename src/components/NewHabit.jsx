@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-export default function NewHabit() {
+export default function NewHabit({ setNewHabit }) {
   const cancel = () => {
     console.log('cancel');
   };
@@ -17,12 +17,8 @@ export default function NewHabit() {
         ))}
       </WeekContainer>
       <div>
-        <Button data-test="habit-create-cancel-btn" onClick={cancel}>
-          Cancelar
-        </Button>
-        <Button data-test="habit-create-save-btn" className="save" onClick={save}>
-          Salvar
-        </Button>
+        <CancelBtn data-test="habit-create-cancel-btn" value="Cancelar" onClick={() => setNewHabit(false)} />
+        <SaveBtn data-test="habit-create-save-btn" value="Salvar" className="save" onClick={save} />
       </div>
     </NewHabitContainer>
   );
@@ -33,7 +29,7 @@ function Day({ value }) {
   const press = () => {
     setSelect(select ? false : true);
   };
-  return <Input data-test="habit-day" type="button" value={value} onClick={press} selected={select} />;
+  return <Input data-test="habit-day" value={value} type="button" onClick={press} selected={select} />;
 }
 
 const NewHabitContainer = styled.div`
@@ -86,23 +82,23 @@ const Input = styled.input`
   line-height: 25px;
 `;
 
-const Button = styled.button`
-  background-color: #ffffff;
-  border-radius: 4.6px;
-
+const Btn = styled.input.attrs({ type: 'button' })`
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
-
   text-align: center;
+`;
 
+const SaveBtn = styled(Btn)`
+  width: 84px;
+  height: 35px;
+  margin-left: 23px;
+  border-radius: 4.6px;
+  background-color: #52b6ff;
+  color: #ffffff;
+`;
+const CancelBtn = styled(Btn)`
+  background-color: #ffffff;
   color: #52b6ff;
-  &.save {
-    width: 84px;
-    height: 35px;
-    margin-left: 23px;
-    background-color: #52b6ff;
-    color: #ffffff;
-  }
 `;
