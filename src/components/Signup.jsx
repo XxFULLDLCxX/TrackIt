@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from './Form';
 import axios from 'axios';
 import { useContext } from 'react';
-import { BASE_URL, Infos } from '../context/core';
+import { Infos } from '../context/core';
 
 export default function Signup() {
   const navigate = useNavigate();

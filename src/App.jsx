@@ -9,7 +9,7 @@ import { Normalize } from './styles';
 import { Infos } from './context/core';
 
 function App() {
-  const [info, setInfo] = useState({ loading: false, user: {} });
+  const [info, setInfo] = useState({ loading: false, user: {}, percentage: 0 });
 
   return (
     <>

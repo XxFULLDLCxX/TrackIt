@@ -1,5 +1,4 @@
 import { createContext } from 'react';
 
-export const Infos = createContext({ loading: false, user: {} });
-
-export const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
+export const Infos = createContext({ loading: false, user: {}, percentage: 0 });
+export const Habits = createContext([]);

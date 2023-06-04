@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import avatar from '../assets/user.svg';
 import { useContext } from 'react';
 import { Infos } from '../context/core';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const { user } = useContext(Infos);
@@ -12,7 +12,9 @@ export default function Header() {
   };
   return (
     <HeaderContainer data-test="header">
-      <h1>TrackIt</h1>
+      <Link to="/" style={{ textDecoration: 'none' }}>
+        <h1>TrackIt</h1>
+      </Link>
       <img data-test="avatar" src={user.avatar} alt="Foto do Usuário" />
     </HeaderContainer>
   );
@@ -25,6 +27,8 @@ const HeaderContainer = styled.div`
   align-items: center;
   width: 375px;
   height: 70px;
+
+  z-index: 1;
 
   background: #126ba5;
   padding: 0px 18px;

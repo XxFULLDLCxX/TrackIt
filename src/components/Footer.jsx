@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { Infos } from '../context/core';
 
 export default function Footer() {
-  const percentage = 0;
+  const { percentage } = useContext(Infos);
 
   return (
     <FooterContainer>

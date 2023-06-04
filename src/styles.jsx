@@ -14,17 +14,25 @@ body {
   background: #E5E5E5;
 }
 
-
 button, input {
   border: none;
   outline: none;
   font-family: inherit;
   user-select: none;
 }
+
+button, input[type='submit'], input[type='button'] {
+  cursor: pointer;
+}
+
 main {
+  overflow-y: auto;
   padding: 70px 0;
   width: 375px;
   height: 100%;
   background-color: #f2f2f2;
+  &::-webkit-scrollbar { 
+    display: none; 
+  } 
 }
 `;

@@ -13,17 +13,28 @@ const now = dayjs().format('dddd DD/MM');
 export default function Today() {
   const [habits, setHabits] = useState([]);
   useEffect(() => {
-    axios.get(`/habits/today`).then((response) => {
-      console.log(response);
-      // setHabits()
-    });
+    axios.get(`/habits/today`)
+    .then(({data}) => {
+      console.log(data);
+      /*     {
+        "id": 3,
+        "name": "Acordar",
+        "done": true,
+        "currentSequence": 1,
+        "highestSequence": 1
+    } */
+    })
+    .catch((error) => {
+      console.log(error);
+      alert(error.response.data.message ? error.response.data.message : error.message);
+    }); // prettier-ignore
   }, []);
   return (
     <TodayContainer>
       <Header />
       <main>
         <h2>{now.charAt(0).toUpperCase() + now.slice(1)}</h2>
-        {!habits && <p>Nenhum hábito concluído ainda</p>}
+        {habits.length === 0 && <p>Nenhum hábito concluído ainda</p>}
         <ul>
           {habits.map((habit) => (
             <li>habit</li>
