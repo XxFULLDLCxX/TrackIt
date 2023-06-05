@@ -190,7 +190,6 @@ function Habit({ name, done, habit, date }) {
   return (
     <ItemView isDone={done}>
       <h2>{name}</h2>
-      <h3>{date.split('T')[0].replace(/(\d{4})\-(\d{2})\-(\d{2})/, '$3/$2/$1')}</h3>
     </ItemView>
   );
 }
@@ -250,10 +249,11 @@ const Title = styled.h2`
 
 const ListView = styled.ul`
   width: 335px;
-  height: 400px;
+  height: 500px;
+
   border-radius: 10px;
   position: absolute;
-  top: 15px;
+  top: 120px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -263,6 +263,13 @@ const ListView = styled.ul`
   gap: 8px;
   overflow-y: auto;
   background-color: #f2f2f2;
+  button {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    text-align: center;
+  }
   &::-webkit-scrollbar {
     display: none;
   }
@@ -273,7 +280,6 @@ const ItemView = styled.li`
     color: ${({ isDone }) => (isDone ? '#8cc654' : '#ea5766')};
     margin-bottom: 8px;
   }
-  min-height: max-content;
   padding: 10px;
   background-color: #ffffff;
   list-style: none;
@@ -284,4 +290,7 @@ const ItemView = styled.li`
   text-align: center;
 
   color: #666666;
+  &:last-child {
+    margin-bottom: 120px;
+  }
 `;
