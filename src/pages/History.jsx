@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import Calendar from 'react-calendar';
 
 /* 
 [
@@ -97,6 +98,7 @@ import axios from 'axios';
 */
 
 export default function History() {
+  const [value, onChange] = useState(new Date());
   useEffect(() => {
     // /habits/history/daily
     // axios
@@ -107,6 +109,10 @@ export default function History() {
       <main>
         <Title>Histórico</Title>
         <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
+
+        <div>
+          <Calendar onChange={onChange} value={value} />
+        </div>
       </main>
       <Footer />
     </HistoryContainer>
