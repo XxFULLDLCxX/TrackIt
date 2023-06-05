@@ -41,10 +41,11 @@ export function NewHabit({ visible, setNewHabit, setVisible }) {
   const { loading, setInfo, ...rest } = useContext(Infos);
   const { habits, setHabits } = useContext(Habits);
   const [days, setDays] = useState([]);
+  const [habit, setHabit] = useState('');
 
   const createHabit = (e) => {
     e.preventDefault();
-    axios.post(`/habits`, { name: e.target['habit'].value, days })
+    axios.post(`/habits`, { name: habit, days })
     .then(({ data: {id, name, days }}) => {
       setHabits([...habits, {id, name, days }])
       setInfo({ ...rest, loading: false});
@@ -61,7 +62,15 @@ export function NewHabit({ visible, setNewHabit, setVisible }) {
   const cancel = () => setVisible(false);
   return (
     <NewHabitForm data-test="habit-create-container" onSubmit={createHabit} visible={visible}>
-      <Text data-test="habit-name-input" placeholder="nome do hábito" required name="habit" disabled={loading} />
+      <Text
+        data-test="habit-name-input"
+        placeholder="nome do hábito"
+        required
+        name="habit"
+        value={habit}
+        onChange={(e) => setHabit(e.target.value)}
+        disabled={loading}
+      />
       <Days days={days} setDays={setDays} />
       <div>
         <Cancel data-test="habit-create-cancel-btn" value="Cancelar" onClick={cancel} disabled={loading} />
