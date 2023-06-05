@@ -34,7 +34,7 @@ export default function HabitsPage() {
           {new_habit && <NewHabit visible={visible} setNewHabit={setNewHabit} setVisible={setVisible} />}
 
           {habits.length !== 0 ? (
-            <ListHabitsContainer data-test="habit-create-container">
+            <ListHabitsContainer data-test="habit-container">
               {habits.map((habit) => (
                 <Habit key={habit.id} id={habit.id} name={habit.name} days={habit.days} />
               ))}

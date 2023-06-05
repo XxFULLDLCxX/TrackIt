@@ -9,7 +9,6 @@ export default function Signup() {
   const { loading, setInfo, ...rest } = useContext(Infos);
   const signup = (info) => {
     setInfo({ ...rest, loading: true });
-    console.log(info);
     axios.post(`/auth/sign-up`, info)
       .then(() => {
         navigate('/');

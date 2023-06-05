@@ -5,24 +5,22 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Habit } from '../components/Today';
+import { useContext } from 'react';
+import { Infos } from '../context/core';
 
 dayjs.locale('pt-br');
 
-const now = dayjs().format('dddd DD/MM');
+const now = dayjs().format('dddd, DD/MM');
 
 export default function Today() {
-  const [habits, setHabits] = useState([]);
+  const { percentage, setInfo, ...rest } = useContext(Infos);
+  const [habits, setHabits] = useState({ list: [], done: [] });
   useEffect(() => {
     axios.get(`/habits/today`)
     .then(({data}) => {
-      console.log(data);
-      /*     {
-        "id": 3,
-        "name": "Acordar",
-        "done": true,
-        "currentSequence": 1,
-        "highestSequence": 1
-    } */
+      setHabits({list: data, done: data.filter((h) => h.done === true)});
+      setInfo({ ...rest, percentage: (data.filter((h) => h.done === true).length / data.length) * 100 });
     })
     .catch((error) => {
       console.log(error);
@@ -33,11 +31,13 @@ export default function Today() {
     <TodayContainer>
       <Header />
       <main>
-        <h2>{now.charAt(0).toUpperCase() + now.slice(1)}</h2>
-        {habits.length === 0 && <p>Nenhum hábito concluído ainda</p>}
+        <h2 data-test="today">{now.charAt(0).toUpperCase() + now.slice(1)}</h2>
+        <p data-test="today-counter" style={{ color: percentage > 0 ? '#8fc549' : '#666666' }}>
+          {percentage > 0 ? `${Math.round(percentage)}% dos hábitos concluídos` : 'Nenhum hábito concluído ainda'}
+        </p>
         <ul>
-          {habits.map((habit) => (
-            <li>habit</li>
+          {habits.list.map((habit) => (
+            <Habit key={habit.id} info={habit} habits={habits} setHabits={setHabits} />
           ))}
         </ul>
       </main>
@@ -48,6 +48,7 @@ export default function Today() {
 
 const TodayContainer = styled.div`
   height: 100svh;
+
   > main h2 {
     height: 29px;
     margin: 28px 17px 3px;
@@ -59,9 +60,18 @@ const TodayContainer = styled.div`
 
     color: #126ba5;
   }
+  > main ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    &:last-child {
+      margin-bottom: 48px;
+    }
+  }
   > main p {
     height: 22;
-    margin-left: 17px;
+    margin: 0 17px 28px;
     font-style: normal;
     font-weight: 400;
     font-size: 17.976px;

@@ -19,9 +19,11 @@ export default function Register() {
 
 const RegisterContainer = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: #ffffff;
+  width: 375px;
+  height: 100svh;
   gap: 25px;
   padding-top: 68px;
   h1 {

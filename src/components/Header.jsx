@@ -20,7 +20,7 @@ export default function Header() {
   );
 }
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   position: fixed;
   display: flex;
   justify-content: space-between;

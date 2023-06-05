@@ -38,7 +38,7 @@ export default function Footer() {
   );
 }
 
-const Menu = styled.div`
+const Menu = styled.nav`
   position: relative;
   display: flex;
   justify-content: space-around;
@@ -67,7 +67,7 @@ const Menu = styled.div`
   }
 `;
 
-const FooterContainer = styled.div`
+const FooterContainer = styled.footer`
   height: 70px;
   position: fixed;
   bottom: 0px;

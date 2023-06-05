@@ -24,13 +24,13 @@ export function Habit({ id, name, days }) {
   };
   return (
     <HabitContainer>
-      <Title>{name}</Title>
+      <Title data-test="habit-name">{name}</Title>
       <WeekContainer>
         {'DSTQQSS'.split('').map((w, index) => (
-          <Day key={index} data-test="habit-day" value={w} selected={days.includes(index)} static />
+          <Day data-test="habit-day" key={index} value={w} selected={days.includes(index)} static />
         ))}
       </WeekContainer>
-      <Dump onClick={() => dumpPress(id)}></Dump>
+      <Dump data-test="habit-delete-btn" onClick={() => dumpPress(id)}></Dump>
     </HabitContainer>
   );
 }
