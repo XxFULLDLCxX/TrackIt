@@ -23,7 +23,7 @@ export function Habit({ id, name, days }) {
     }
   };
   return (
-    <HabitContainer>
+    <HabitContainer data-test="habit-container">
       <Title data-test="habit-name">{name}</Title>
       <WeekContainer>
         {'DSTQQSS'.split('').map((w, index) => (
