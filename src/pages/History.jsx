@@ -5,7 +5,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import Calendar from 'react-calendar';
-
+import 'react-calendar/dist/Calendar.css';
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
 /* 
 [
     {
@@ -103,6 +105,20 @@ export default function History() {
     // /habits/history/daily
     // axios
   }, []);
+  const calendarStyle = (date) => {
+    let currentDate = `${new Date().getDate()} ${new Date().getMonth() + 1} ${new Date().getFullYear()}`;
+    let allDate = `${date.getDate()} ${date.getMonth() + 1} ${date.getFullYear()}`;
+    console.log(currentDate);
+    if (allDate === currentDate)
+      return {
+        style: {
+          backgroundColor: '#88C9E8',
+          border: '1px solid gray',
+          margin: 0,
+          padding: 0,
+        },
+      };
+  };
   return (
     <HistoryContainer>
       <Header />
@@ -111,7 +127,7 @@ export default function History() {
         <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
 
         <div>
-          <Calendar onChange={onChange} value={value} />
+          <Calendar data-test="calendar" dayPropGetter={calendarStyle} onChange={onChange} value={value} />
         </div>
       </main>
       <Footer />
