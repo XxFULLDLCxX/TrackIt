@@ -27,7 +27,9 @@ export function Habit({ id, name, days }) {
       <Title data-test="habit-name">{name}</Title>
       <WeekContainer>
         {'DSTQQSS'.split('').map((w, index) => (
-          <Day data-test="habit-day" key={index} value={w} selected={days.includes(index)} static />
+          <Day data-test="habit-day" key={index} selected={days.includes(index)} static>
+            {w}
+          </Day>
         ))}
       </WeekContainer>
       <Dump data-test="habit-delete-btn" onClick={() => dumpPress(id)}></Dump>
@@ -81,11 +83,12 @@ function Days({ days, setDays }) {
         <Day
           data-test="habit-day"
           key={index}
-          value={w}
           onClick={() => press(index)}
           selected={days.includes(index)}
           disabled={loading}
-        />
+        >
+          {w}
+        </Day>
       ))}
     </WeekContainer>
   );
@@ -197,18 +200,16 @@ const Title = styled.h3`
 
   color: #666666;
 `;
-const Day = styled.input.attrs((props) => ({ type: 'button', desabled: 'static' in props }))`
+const Day = styled.button.attrs((props) => ({ type: 'button', disabled: 'static' in props }))`
   &::placeholder {
     color: #dbdbdb;
   }
+  width: 30px;
+  height: 30px;
+  background-color: ${({ selected }) => (selected ? '#CFCFCF' : '#FFFFFF')};
+  border: 1px solid ${({ selected }) => (selected ? '#CFCFCF' : '#D5D5D5')};
+  color: ${({ selected }) => (selected ? '#FFFFFF' : '#DBDBDB')};
 
-  &[type='button'] {
-    width: 30px;
-    height: 30px;
-    background-color: ${({ selected }) => (selected ? '#CFCFCF' : '#FFFFFF')};
-    border: 1px solid ${({ selected }) => (selected ? '#CFCFCF' : '#D5D5D5')};
-    color: ${({ selected }) => (selected ? '#FFFFFF' : '#DBDBDB')};
-  }
   border-radius: 5px;
 
   font-style: normal;
