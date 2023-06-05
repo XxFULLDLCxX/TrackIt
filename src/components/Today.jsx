@@ -34,7 +34,7 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
         <Title data-test="today-habit-name">{info.name}</Title>
         <div>
           <p data-test="today-habit-sequence">
-            Sequência atual: <span style={{ color: sequence > 0 ? '#8fc549' : '#666666' }}>{sequence} dias</span>
+            Sequência atual: <span style={{ color: complete ? '#8fc549' : '#666666' }}>{sequence} dias</span>
           </p>
           <p data-test="today-habit-record">
             Seu recorde:
