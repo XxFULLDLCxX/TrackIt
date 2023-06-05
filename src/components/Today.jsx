@@ -12,15 +12,15 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
   const { percentage, setInfo, ...rest } = useContext(Infos);
 
   const check = () => {
-    setComplete(!complete);
-    setHabits({ list, done: complete ? done.filter((i) => i.id !== info.id) : [...done, info] });
-    setInfo({ ...rest, percentage: ((complete ? done.length - 1 : done.length + 1) / list.length) * 100 });
-
     axios.post(`/habits/${info.id}/${!complete ? 'check' : 'uncheck'}`)
       .then(() => {
+        setComplete(!complete);
         console.log('Atualizado', !complete);
         setRecord(!complete && record < sequence + 1 ? record + 1 : record - 1);
         setSequence(!complete ? sequence + 1 : sequence - 1);
+        setHabits({ list, done: complete ? done.filter((i) => i.id !== info.id) : [...done, info] });
+        setInfo({ ...rest, percentage: ((complete ? done.length - 1 : done.length + 1) / list.length) * 100 });
+    
       })
       .catch((error) => {
         console.log('Today', error);
