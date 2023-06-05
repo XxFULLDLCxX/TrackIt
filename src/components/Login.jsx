@@ -3,23 +3,24 @@ import Form from './Form';
 import { Infos } from '../context/core';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
-axios.defaults.baseURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
+import { useEffect } from 'react';
 
 export default function Login() {
+  useEffect(() => {
+    console.log('Recarregou Login');
+  });
   const { loading, setInfo, ...rest } = useContext(Infos);
-
   const navigate = useNavigate();
   const login = (info) => {
     console.log('login', info);
     setInfo({ ...rest, loading: true });
 
     axios.post(`/auth/login`, info)
-      .then(({ data: {id, name, image, token: AUTH_TOKEN }}) => {
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + AUTH_TOKEN;
-        console.log(AUTH_TOKEN);
+      .then(({ data }) => {
+        localStorage.setItem('user', JSON.stringify({...data}));
+        setInfo({ ...rest, loading: false, user: data});
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
         navigate('/hoje');
-        setInfo({ ...rest, loading: false, user: {id, name, avatar: image}});
       })
       .catch((error) => {
         console.log(error);

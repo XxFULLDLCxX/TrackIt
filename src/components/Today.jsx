@@ -16,16 +16,16 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
     setHabits({ list, done: complete ? done.filter((i) => i.id !== info.id) : [...done, info] });
     setInfo({ ...rest, percentage: ((complete ? done.length - 1 : done.length + 1) / list.length) * 100 });
 
-    axios.post(`/habits/${info.id}/${!complete ? 'check' : 'uncheck'}`, {})
-    .then(() => {
-      console.log('Atualizado', !complete);
-      setRecord(!complete && record < (sequence + 1) ? record + 1: record - 1);
-      setSequence(!complete ? sequence + 1 : sequence - 1);
-    })
-    .catch((error) => {
-      console.log(error);
-      alert(error.response.data.message ? error.response.data.message : error.message);
-    }); // prettier-ignore
+    axios.post(`/habits/${info.id}/${!complete ? 'check' : 'uncheck'}`)
+      .then(() => {
+        console.log('Atualizado', !complete);
+        setRecord(!complete && record < sequence + 1 ? record + 1 : record - 1);
+        setSequence(!complete ? sequence + 1 : sequence - 1);
+      })
+      .catch((error) => {
+        console.log('Today', error);
+        // alert(error.response.data.message ? error.response.data.message : error.message);
+      }); // prettier-ignore
   };
 
   return (
@@ -39,7 +39,7 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
           </p>
           <p data-test="today-habit-record">
             Seu recorde:
-            <span style={{ color: record > 0 && record <= sequence ? '#8fc549' : '#666666' }}> {record} dias</span>
+            <span style={{ color: record > 0 && record <= sequence ? '#8FC549' : '#666666' }}> {record} dias</span>
           </p>
         </div>
       </InfoContainer>

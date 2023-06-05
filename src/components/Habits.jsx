@@ -27,7 +27,7 @@ export function Habit({ id, name, days }) {
       <Title data-test="habit-name">{name}</Title>
       <WeekContainer>
         {'DSTQQSS'.split('').map((w, index) => (
-          <Day data-test="habit-day" key={index} selected={days.includes(index)} static>
+          <Day data-test="habit-day" key={index} selected={days.includes(index)} disabled>
             {w}
           </Day>
         ))}
@@ -45,18 +45,20 @@ export function NewHabit({ visible, setNewHabit, setVisible }) {
 
   const createHabit = (e) => {
     e.preventDefault();
+    /* if (habit === '') {
+      return alert('O nome do hábito deve ser definido');
+    } */
     axios.post(`/habits`, { name: habit, days })
-    .then(({ data: {id, name, days }}) => {
-      setHabits([...habits, {id, name, days }])
-      setInfo({ ...rest, loading: false});
-      setNewHabit(false)
-    })
-    .catch((error) => {
-      console.log(error);
-      setInfo({ ...rest, loading: false});
-      // alert(error.response.data.message ? error.response.data.message : error.message);
-      setTimeout(() => alert(error.response.data.message ? error.response.data.message : error.message), 10);
-    }); // prettier-ignore
+      .then(({ data: { id, name, days } }) => {
+        setHabits([...habits, { id, name, days }]);
+        setInfo({ ...rest, loading: false });
+        setNewHabit(false);
+      })
+      .catch((error) => {
+        setInfo({ ...rest, loading: false });
+        // alert(error.response.data.message ? error.response.data.message : error.message);
+        setTimeout(() => alert(error.response.data.message ? error.response.data.message : error.message), 10);
+      }); // prettier-ignore
     setInfo({ ...rest, loading: true });
   };
   const cancel = () => setVisible(false);
@@ -65,7 +67,6 @@ export function NewHabit({ visible, setNewHabit, setVisible }) {
       <Text
         data-test="habit-name-input"
         placeholder="nome do hábito"
-        required
         name="habit"
         value={habit}
         onChange={(e) => setHabit(e.target.value)}
@@ -209,7 +210,7 @@ const Title = styled.h3`
 
   color: #666666;
 `;
-const Day = styled.button.attrs((props) => ({ type: 'button', disabled: 'static' in props }))`
+const Day = styled.button.attrs({ type: 'button' })`
   &::placeholder {
     color: #dbdbdb;
   }

@@ -14,18 +14,21 @@ dayjs.locale('pt-br');
 const now = dayjs().format('dddd, DD/MM');
 
 export default function Today() {
-  const { percentage, setInfo, ...rest } = useContext(Infos);
+  const { percentage, setInfo, user, ...rest } = useContext(Infos);
   const [habits, setHabits] = useState({ list: [], done: [] });
   useEffect(() => {
-    axios.get(`/habits/today`)
-    .then(({data}) => {
-      setHabits({list: data, done: data.filter((h) => h.done === true)});
-      setInfo({ ...rest, percentage: (data.filter((h) => h.done === true).length / data.length) * 100 });
-    })
-    .catch((error) => {
-      console.log(error);
-      alert(error.response.data.message ? error.response.data.message : error.message);
-    }); // prettier-ignore
+    console.log('Recarregou... Today');
+
+    axios
+      .get(`/habits/today`, { headers: { Authorization: `Bearer ${user.token}` } })
+      .then(({ data }) => {
+        setHabits({ list: data, done: data.filter((h) => h.done === true) });
+        setInfo({ ...rest, user, percentage: (data.filter((h) => h.done === true).length / data.length) * 100 });
+      })
+      .catch((error) => {
+        console.log('Page Today', error, rest);
+        alert(error.response.data.message ? error.response.data.message : error.message);
+      });
   }, []);
   return (
     <TodayContainer>
