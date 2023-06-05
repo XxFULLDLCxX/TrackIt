@@ -17,8 +17,6 @@ export default function Today() {
   const { percentage, setInfo, user, ...rest } = useContext(Infos);
   const [habits, setHabits] = useState({ list: [], done: [] });
   useEffect(() => {
-    console.log('Recarregou... Today');
-
     axios
       .get(`/habits/today`, { headers: { Authorization: `Bearer ${user.token}` } })
       .then(({ data }) => {
@@ -26,7 +24,6 @@ export default function Today() {
         setInfo({ ...rest, user, percentage: (data.filter((h) => h.done === true).length / data.length) * 100 });
       })
       .catch((error) => {
-        console.log('Page Today', error, rest);
         alert(error.response.data.message ? error.response.data.message : error.message);
       });
   }, []);

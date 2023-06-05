@@ -12,15 +12,11 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit';
 
-console.log('Recarregou... APP');
-
 function App() {
   const user = JSON.parse(localStorage.getItem('user'));
   const [info, setInfo] = useState({ loading: false, user, percentage: 0 });
   const navigate = useNavigate();
   useEffect(() => {
-    console.log('Recarregou... Today');
-
     if (user) {
       axios
         .post(`/auth/login`, { email: user.email, password: user.password })
@@ -31,11 +27,8 @@ function App() {
           navigate('/hoje');
         })
         .catch((error) => {
-          console.log(error);
-          console.log(user, 'APP');
-          // alert(error.response.data.message ? error.response.data.message : error.message);
+          alert(error.response.data.message ? error.response.data.message : error.message);
         });
-      console.log('ue');
     }
   }, []);
   return (

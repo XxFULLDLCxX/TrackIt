@@ -14,10 +14,8 @@ export function Habit({ id, name, days }) {
       setHabits([...habits.filter((n) => n.id != id)]);
       axios.delete(`/habits/${id}`)
         .then((response) => {
-          console.log(response);
         })
         .catch((error) => {
-          console.log(error);
           alert(error.response.data.message ? error.response.data.message : error.message);
         }); // prettier-ignore
     }

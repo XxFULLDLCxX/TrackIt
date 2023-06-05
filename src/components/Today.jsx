@@ -15,7 +15,6 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
     axios.post(`/habits/${info.id}/${!complete ? 'check' : 'uncheck'}`)
       .then(() => {
         setComplete(!complete);
-        console.log('Atualizado', !complete);
         setRecord(!complete && record < sequence + 1 ? record + 1 : record - 1);
         setSequence(!complete ? sequence + 1 : sequence - 1);
         setHabits({ list, done: complete ? done.filter((i) => i.id !== info.id) : [...done, info] });
@@ -23,8 +22,7 @@ export function Habit({ info, habits: { list, done }, setHabits }) {
     
       })
       .catch((error) => {
-        console.log('Today', error);
-        // alert(error.response.data.message ? error.response.data.message : error.message);
+        alert(error.response.data.message ? error.response.data.message : error.message);
       }); // prettier-ignore
   };
 

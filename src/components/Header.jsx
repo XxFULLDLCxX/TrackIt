@@ -1,33 +1,11 @@
 import styled from 'styled-components';
 import { useContext } from 'react';
 import { Infos } from '../context/core';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
-  const { user, setInfo, ...rest } = useContext(Infos);
-  console.log(user);
-  const navigate = useNavigate();
-  useEffect(() => {
-    console.log('Recarregou Header');
-  });
+  const { user } = useContext(Infos);
 
-  /* useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) {
-      axios.post(`/auth/login`, { email: user.email, password: user.password })
-      .then(({ data}) => {
-        localStorage.setItem('user', JSON.stringify({data}));
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + data.token;
-        setInfo({ ...rest, user: data});
-      })
-      .catch((error) => {
-        alert(error.response.data.message ? error.response.data.message : error.message);
-      }); // prettier-ignore
-      console.log('ue');
-    }
-  }, []); */
   return (
     <HeaderContainer data-test="header">
       <Link to="/" style={{ textDecoration: 'none' }}>
