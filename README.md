@@ -2,7 +2,7 @@
 
 Uma aplicação completa de acompanhamento de hábitos! Com direito a cadastro, login e muitas bibliotecas 🙂
 
-Deploy na Vercel: https://Trackit-444c43.vercel.app
+Deploy na Vercel: https://track-it-444c43.vercel.app/
 Vite + JS
 
 ## Run Localy
